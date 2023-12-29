@@ -6,26 +6,29 @@
 DefaultKeyboardMode::DefaultKeyboardMode(socd::SocdType socd_type) {}
 
 void DefaultKeyboardMode::UpdateKeys(InputState &inputs) {
-    Press(HID_KEY_A, inputs.l);
-    Press(HID_KEY_B, inputs.left);
-    Press(HID_KEY_C, inputs.down);
-    Press(HID_KEY_D, inputs.right);
-    Press(HID_KEY_E, inputs.mod_x);
-    Press(HID_KEY_F, inputs.mod_y);
-    Press(HID_KEY_G, inputs.select);
-    Press(HID_KEY_H, inputs.start);
-    Press(HID_KEY_I, inputs.home);
-    Press(HID_KEY_J, inputs.r);
-    Press(HID_KEY_K, inputs.y);
-    Press(HID_KEY_L, inputs.lightshield);
-    Press(HID_KEY_M, inputs.midshield);
-    Press(HID_KEY_N, inputs.b);
-    Press(HID_KEY_O, inputs.x);
-    Press(HID_KEY_P, inputs.z);
-    Press(HID_KEY_Q, inputs.up);
-    Press(HID_KEY_R, inputs.c_up);
-    Press(HID_KEY_S, inputs.c_left);
-    Press(HID_KEY_T, inputs.c_right);
-    Press(HID_KEY_U, inputs.a);
-    Press(HID_KEY_V, inputs.c_down);
+    // Remapped for a silly classic FPS control scheme
+    Press(HID_KEY_TAB, inputs.a0);
+    Press(HID_KEY_A, inputs.a1);
+    Press(HID_KEY_S, inputs.a2);
+    Press(HID_KEY_D, inputs.a3);
+    Press(HID_KEY_W, inputs.a4);
+
+    Press(HID_KEY_C, inputs.mx);
+    Press(HID_KEY_SPACE, inputs.my);
+
+    Press(HID_KEY_1, inputs.p1);
+    Press(HID_KEY_2, inputs.p2);
+    Press(HID_KEY_3, inputs.p3);
+    Press(HID_KEY_ESCAPE, inputs.p4);
+
+    Press(HID_KEY_R, inputs.k1);
+    Press(HID_KEY_F, inputs.k2);
+    Press(HID_KEY_G, inputs.k3);
+    Press(HID_KEY_V, inputs.k4);
+
+    Press(HID_KEY_ARROW_LEFT, inputs.c1);
+    Press(HID_KEY_ARROW_UP, inputs.c2);
+    Press(HID_KEY_ARROW_RIGHT, inputs.c3);
+    Press(HID_KEY_E, inputs.c4);
+    Press(HID_KEY_ARROW_DOWN, inputs.c5);
 }

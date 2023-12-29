@@ -32,29 +32,33 @@ void set_mode(CommunicationBackend *backend, KeyboardMode *mode) {
 
 void select_mode(CommunicationBackend *backend) {
     InputState &inputs = backend->GetInputs();
-    if (inputs.mod_x && !inputs.mod_y && inputs.start) {
-        if (inputs.l) {
-            set_mode(
-                backend,
-                new Melee20Button(socd::SOCD_2IP_NO_REAC, { .crouch_walk_os = false })
-            );
-        } else if (inputs.left) {
+    // A0 + MX for changing modes
+    // P1: Melee
+    // P2: P+
+    // P3: U
+    // K1: FGC
+    // K2: RoA
+    if (inputs.mx && !inputs.my && inputs.a0) {
+        if (inputs.p1) {
+            set_mode(backend, new Melee20Button(socd::SOCD_NEUTRAL, { .crouch_walk_os = false }));
+        } else if (inputs.p2) {
             set_mode(
                 backend,
                 new ProjectM(
-                    socd::SOCD_2IP_NO_REAC,
+                    socd::SOCD_NEUTRAL,
                     { .true_z_press = false, .ledgedash_max_jump_traj = true }
                 )
             );
-        } else if (inputs.down) {
-            set_mode(backend, new Ultimate(socd::SOCD_2IP));
-        } else if (inputs.right) {
-            set_mode(backend, new FgcMode(socd::SOCD_NEUTRAL, socd::SOCD_NEUTRAL));
-        } else if (inputs.b) {
-            set_mode(backend, new RivalsOfAether(socd::SOCD_2IP));
+        } else if (inputs.p3) {
+            set_mode(backend, new Ultimate(socd::SOCD_NEUTRAL));
+        } else if (inputs.k1) {
+            set_mode(backend, new FgcMode(socd::SOCD_NEUTRAL, socd::SOCD_DIR2_PRIORITY));
+        } else if (inputs.k2) {
+            set_mode(backend, new RivalsOfAether(socd::SOCD_NEUTRAL));
         }
-    } else if (inputs.mod_y && !inputs.mod_x && inputs.start) {
-        if (inputs.l) {
+        // Keyboard mode: MY + A0 -> P1
+    } else if (inputs.my && !inputs.mx && inputs.a0) {
+        if (inputs.p1) {
             set_mode(backend, new DefaultKeyboardMode(socd::SOCD_2IP));
         }
     }

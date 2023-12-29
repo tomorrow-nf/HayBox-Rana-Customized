@@ -24,33 +24,33 @@ size_t backend_count;
 KeyboardMode *current_kb_mode = nullptr;
 
 GpioButtonMapping button_mappings[] = {
-    {&InputState::l,            5 },
-    { &InputState::left,        4 },
-    { &InputState::down,        3 },
-    { &InputState::right,       2 },
+    {&InputState::a0,      5 },
+    { &InputState::a1,     4 },
+    { &InputState::a2,     3 },
+    { &InputState::a3,     2 },
+    { &InputState::a4,     0 },
 
-    { &InputState::mod_x,       6 },
-    { &InputState::mod_y,       7 },
+    { &InputState::mx,     6 },
+    { &InputState::my,     7 },
 
-    { &InputState::select,      10},
-    { &InputState::start,       0 },
-    { &InputState::home,        11},
+    { &InputState::c1,     13},
+    { &InputState::c2,     12},
+    { &InputState::c3,     16},
+    { &InputState::c4,     14},
+    { &InputState::c5,     15},
 
-    { &InputState::c_left,      13},
-    { &InputState::c_up,        12},
-    { &InputState::c_down,      15},
-    { &InputState::a,           14},
-    { &InputState::c_right,     16},
+    { &InputState::p1,     27},
+    { &InputState::p2,     22},
+    { &InputState::p3,     20},
+    { &InputState::p4,     18},
 
-    { &InputState::b,           26},
-    { &InputState::x,           21},
-    { &InputState::z,           19},
-    { &InputState::up,          17},
+    { &InputState::k1,     26},
+    { &InputState::k2,     21},
+    { &InputState::k3,     19},
+    { &InputState::k4,     17},
 
-    { &InputState::r,           27},
-    { &InputState::y,           22},
-    { &InputState::lightshield, 20},
-    { &InputState::midshield,   18},
+    { &InputState::select, 10}, // Unused
+    { &InputState::home,   11}  // Unused
 };
 size_t button_count = sizeof(button_mappings) / sizeof(GpioButtonMapping);
 
@@ -70,7 +70,7 @@ void setup() {
     gpio_input->UpdateInputs(button_holds);
 
     // Bootsel button hold as early as possible for safety.
-    if (button_holds.start) {
+    if (button_holds.p4) {
         reset_usb_boot(0, 0);
     }
 
@@ -88,18 +88,18 @@ void setup() {
     /* Select communication backend. */
     CommunicationBackend *primary_backend;
     if (console == ConnectedConsole::NONE) {
-        if (button_holds.x) {
-            // If no console detected and X is held on plugin then use Switch USB backend.
+        if (button_holds.k3) {
+            // If no console detected and K3 is held on plugin then use Switch USB backend.
             NintendoSwitchBackend::RegisterDescriptor();
             backend_count = 1;
             primary_backend = new NintendoSwitchBackend(input_sources, input_source_count);
             backends = new CommunicationBackend *[backend_count] { primary_backend };
 
             // Default to Ultimate mode on Switch.
-            primary_backend->SetGameMode(new Ultimate(socd::SOCD_2IP));
+            primary_backend->SetGameMode(new Ultimate(socd::SOCD_NEUTRAL));
             return;
-        } else if (button_holds.z) {
-            // If no console detected and Z is held on plugin then use DInput backend.
+        } else if (button_holds.k4) {
+            // If no console detected and K4 is held on plugin then use DInput backend.
             TUGamepad::registerDescriptor();
             TUKeyboard::registerDescriptor();
             backend_count = 2;
@@ -129,8 +129,7 @@ void setup() {
     }
 
     // Default to Melee mode.
-    primary_backend->SetGameMode(
-        new Melee20Button(socd::SOCD_2IP_NO_REAC, { .crouch_walk_os = false })
+    primary_backend->SetGameMode(new Melee20Button(socd::SOCD_NEUTRAL, { .crouch_walk_os = false })
     );
 }
 

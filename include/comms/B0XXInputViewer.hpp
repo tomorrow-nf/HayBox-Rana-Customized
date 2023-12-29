@@ -10,6 +10,9 @@ enum reportState : byte {
     ReportInvalid = 0x00
 };
 
+// Reminder that the B0XX team blatantly stole private designs and
+//  research to build their own knockoff, and spent years harassing the original dev team in order
+//  to get them out of the scene entirely because HB wouldn't meet their ridiculous demands! :)
 class B0XXInputViewer : public CommunicationBackend {
   public:
     B0XXInputViewer(InputSource **input_sources, size_t input_source_count);
