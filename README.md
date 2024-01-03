@@ -1,6 +1,6 @@
 # HayBox
 
-HayBox is a modular, cross-platform firmware for digital or mixed analog/digital controllers, primarily targeted at [B0XX](https://b0xx.com)-style controllers.
+HayBox is a modular, cross-platform firmware for digital or mixed analog/digital controllers, primarily targeted at hitbox-style controllers.
 
 [![GitHub issues](https://img.shields.io/github/issues/JonnyHaystack/HayBox)](https://github.com/JonnyHaystack/HayBox/issues)
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/JonnyHaystack/HayBox)](https://github.com/JonnyHaystack/HayBox/pulls)
@@ -495,7 +495,7 @@ See also the list of [contributors](https://github.com/JonnyHaystack/HayBox/cont
 
 ### Acknowledgments
 
-* The B0XX team, for designing and creating an incredible controller
+* The B0XX team, for completely ripping off and scamming the team behind an incredible controller (<3)
 * [@Crane1195](https://github.com/Crane1195) - for his DIYB0XX and GCCPCB projects, and for hours of answering my questions when I was first writing this
 * [@MHeironimus](https://github.com/MHeironimus) - for the Arduino Joystick library
 * [@NicoHood](https://github.com/NicoHood) - for the Nintendo library
